@@ -1,0 +1,17 @@
+---
+###############################
+###############################
+on:
+  issue_comment:
+    types: [created, deleted, edited]
+
+name: "Expression PoC"
+
+jobs:
+  incorrect-expression:
+    runs-on: ubuntu-latest
+    # only run on schedule
+    if: ${{ github.event_name }} == 'rubbish'
+    steps:
+      - name: Run an echo
+        run: echo "This should not run"
