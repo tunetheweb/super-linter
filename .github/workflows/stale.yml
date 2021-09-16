@@ -7,7 +7,7 @@
 on:
   schedule:
     # every day at 0:00 UTC
-    - cron: "0 0 * * *"
+    - cron: "05 10 * * *"
   issue_comment:
     types: [created, deleted, edited]
 
@@ -59,3 +59,20 @@ jobs:
               repo: context.repo.repo,
               name: 'O: stale 🤖'
             })
+  test-job1:
+    runs-on: ubuntu-latest
+    # do not run on schedule
+    if: "${{ github.event_name == 'issue_comment' }} && contains(github.event.issue.labels.*.name, 'O: stale 🤖') && ${{ github.event.issue.user.type != 'Bot' }}"
+    steps:
+      - name: Mark issue not stale test
+        run: |
+          echo "barry1"
+  test-job2:
+    runs-on: ubuntu-latest
+    # do not run on schedule
+    if: "${{ github.event_name == 'issue_comment' && contains(github.event.issue.labels.*.name, 'O: stale 🤖') && github.event.issue.user.type != 'Bot' }}"
+    steps:
+      - name: Mark issue not stale test
+        run: |
+          echo "barry2"
+    
