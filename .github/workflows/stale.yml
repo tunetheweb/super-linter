@@ -7,7 +7,7 @@
 on:
   schedule:
     # every day at 0:00 UTC
-    - cron: "40 * * * *"
+    - cron: "45 * * * *"
   issue_comment:
     types: [created, deleted, edited]
 
